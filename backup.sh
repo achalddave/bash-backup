@@ -1,13 +1,10 @@
-SRCDIR=$1
-DSTDIR=$2
+SRCDIR=src
+DSTDIR=dst
 
 # copy recursively (-r) updated (-u) files, preserve (-p) attributes if
 # possible
-cp -R -u -p "$SRCDIR/*" "$DSTDIR/*"
+$(echo "cp -R -u -p $SRCDIR/* $DSTDIR")
 
-echo "Extra files: "
 for file in $(find $DSTDIR/*) ; do
-    if [ ! -e "$SRCDIR/${file#*/}" ] ; then
-        echo $file
-    fi
+    [ ! -e "$SRCDIR/${file#*/}" ] && echo "Removing $file" && rm $file
 done
