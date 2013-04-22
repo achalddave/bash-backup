@@ -1,19 +1,13 @@
-SRCDIR=src
-DSTDIR=dst
+SRCDIR=$1
+DSTDIR=$2
 
-# backupdir(srcdir, dstdir)
-function backupdir {
-echo "Source files in $1: "
-for f in "$1/*"
-do
-    echo $f
+# copy recursively (-r) updated (-u) files, preserve (-p) attributes if
+# possible
+cp -R -u -p "$SRCDIR/*" "$DSTDIR/*"
+
+echo "Extra files: "
+for file in $(find $DSTDIR/*) ; do
+    if [ ! -e "$SRCDIR/${file#*/}" ] ; then
+        echo $file
+    fi
 done
-
-echo "Destination files in $2: "
-for f in "$2/*"
-do
-    echo $f
-done
-}
-
-backupdir $SRCDIR $DSTDIR
