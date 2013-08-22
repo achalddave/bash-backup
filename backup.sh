@@ -1,7 +1,7 @@
 SRCDIR=src
 DSTDIR=dst
 
-# copy recursively (-r) updated (-u) files, preserve (-p) attributes if
+# copy recursively (-R) updated (-u) files, preserve (-p) attributes if
 # possible
 $(echo "cp -R -u -p $SRCDIR/* $DSTDIR")
 
